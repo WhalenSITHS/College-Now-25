@@ -6,7 +6,9 @@ const routes = require("./Routes/index");
 app.use(express.json());
 //app.use(express.urlencoded());
 app.use("/", routes);
-
+app.use((req, res) => {
+  res.status(404).send("Page Not Found");
+});
 app.listen(port, () => {
   console.log(`Server is up on port ${port}`);
 });

@@ -1,13 +1,9 @@
 const express = require("express");
 const router = new express.Router();
+const userController = require("../controllers/userController");
 ///users/
-router.get("/", (req, res) => {
-  try {
-    return res.send("User Path");
-  } catch (error) {
-    console.log(error);
-  }
-});
+router.get("/", userController.homePage);
+
 ///users/irene
 router.get("/irene", (req, res) => {
   try {
