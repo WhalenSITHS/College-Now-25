@@ -2,7 +2,9 @@ const express = require("express");
 const router = new express.Router();
 const userRoutes = require("./User");
 const locationRoutes = require("./Locations");
-router.use("/users", userRoutes);
+const shopController = require("../controllers/shopController");
+const logger = require("../middleware/logger.js");
+router.use("/users", logger.logger, userRoutes);
 router.use("/locations", locationRoutes);
 router.get("/", (req, res) => {
   try {
@@ -23,5 +25,5 @@ router.post("/login", (req, res) => {
   const { username, password } = req.body;
   res.send(`${username} has logged in`);
 });
-
+router.post("/add", shopController.createShop);
 module.exports = router;
