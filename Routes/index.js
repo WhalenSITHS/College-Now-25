@@ -3,7 +3,9 @@ const router = new express.Router();
 const userRoutes = require("./User");
 const locationRoutes = require("./Locations");
 const shopController = require("../controllers/shopController");
+const reviewController = require("../controllers/reviewController.js");
 const logger = require("../middleware/logger.js");
+router.use("/reviews", reviewController.Reviews);
 router.use("/users", logger.logger, userRoutes);
 router.use("/locations", locationRoutes);
 router.get("/", (req, res) => {
