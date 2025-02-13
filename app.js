@@ -1,6 +1,7 @@
 const express = require("express");
 const port = process.env.PORT || 3000;
 const app = express();
+require("./DB/mongoose");
 const routes = require("./Routes/index");
 //routes imported from routes folder
 app.use(express.json());
