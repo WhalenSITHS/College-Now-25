@@ -5,7 +5,8 @@ const locationRoutes = require("./Locations");
 const shopController = require("../controllers/shopController");
 const reviewController = require("../controllers/reviewController.js");
 const logger = require("../middleware/logger.js");
-router.use("/reviews", reviewController.Reviews);
+router.post("/reviews", reviewController.Reviews);
+router.get("/getReviews", reviewController.getReviews);
 router.use("/users", logger.logger, userRoutes);
 router.use("/locations", locationRoutes);
 router.get("/", (req, res) => {
