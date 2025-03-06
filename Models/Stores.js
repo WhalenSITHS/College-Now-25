@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const slugify = require("slugify");
-const shopSchema = new mongoose.Schema({
+const storeSchema = new mongoose.Schema({
   name: {
     type: String,
     trim: true,
@@ -14,7 +14,7 @@ const shopSchema = new mongoose.Schema({
   tags: [String],
 });
 
-shopSchema.pre("save", function (next) {
+storeSchema.pre("save", function (next) {
   if (!this.isModified("name")) {
     next();
     return;
@@ -23,4 +23,4 @@ shopSchema.pre("save", function (next) {
   next();
   //note for future, check if slugs are unique
 });
-module.exports = mongoose.model("Shop", shopSchema);
+module.exports = mongoose.model("Store", storeSchema);

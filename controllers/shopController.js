@@ -1,9 +1,9 @@
-const Shop = require("../Models/Stores");
-exports.createShop = async (req, res) => {
+const Store = require("../Models/Stores");
+exports.createStore = async (req, res) => {
   try {
-    const shop = new Shop(req.body);
-    await shop.save();
-    res.json(shop);
+    const store = new Store(req.body);
+    await store.save();
+    res.json(store);
   } catch (error) {
     res.status(500).json(error);
   }
