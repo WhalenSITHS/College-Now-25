@@ -1,14 +1,18 @@
 const express = require("express");
 const router = new express.Router();
-const userRoutes = require("./User");
+
 const locationRoutes = require("./Locations");
 const shopController = require("../controllers/shopController");
 const reviewController = require("../controllers/reviewController.js");
-const logger = require("../middleware/logger.js");
+const authController = require("../Controllers/authController");
+
 router.post("/reviews", reviewController.Reviews);
 router.get("/getReviews", reviewController.getReviews);
-router.use("/users", logger.logger, userRoutes);
+
 router.use("/locations", locationRoutes);
+router.post("/register", authController.register);
+router.post("/login", authController.login);
+router.get("/protected", authController.authCheck, authController.protected);
 router.get("/", (req, res) => {
   try {
     return res.send("We're Live");
