@@ -16,10 +16,25 @@ router.get("/", (req, res) => {
 });
 router.get("/stores", async (req, res) => {
   try {
-    const stores = await Stores.find();
-    return res.send(stores);
-  } catch (error) {
-    console.log(error);
+    let { page = 1, limit = 4 } = req.query; // Default: page 1, 10 results per page
+    page = parseInt(page);
+    limit = parseInt(limit);
+
+    const stores = await Stores.find()
+      .skip((page - 1) * limit) // Skip previous pages
+      .limit(limit); // Limit results per page
+
+    const totalStores = await Stores.countDocuments();
+    const totalPages = Math.ceil(totalStores / limit);
+
+    res.json({
+      currentPage: page,
+      totalPages,
+      totalStores,
+      results: stores,
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
   }
 });
 router.get("/stores/tag/:tag", async (req, res) => {
