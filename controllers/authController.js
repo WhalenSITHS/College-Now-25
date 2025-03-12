@@ -18,7 +18,7 @@ exports.register = async function (req, res) {
     res.json({ success: false, msg: "Please pass username and password." });
   } else {
     console.log(req.body.password);
-    var newUser = new User({
+    const newUser = new User({
       username: req.body.username,
       password: req.body.password,
     });

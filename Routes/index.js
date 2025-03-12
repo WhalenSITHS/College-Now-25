@@ -7,6 +7,7 @@ const authController = require("../Controllers/authController");
 router.post("/register", authController.register);
 router.post("/login", authController.login);
 router.get("/protected", authController.authCheck, authController.protected);
+
 router.get("/", (req, res) => {
   try {
     return res.send("We're Live");
@@ -16,7 +17,7 @@ router.get("/", (req, res) => {
 });
 router.get("/stores", async (req, res) => {
   try {
-    let { page = 1, limit = 4 } = req.query; // Default: page 1, 10 results per page
+    let { page = 1, limit = 10 } = req.query; // Default: page 1, 10 results per page
     page = parseInt(page);
     limit = parseInt(limit);
 
