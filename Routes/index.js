@@ -7,7 +7,13 @@ const authController = require("../Controllers/authController");
 router.post("/register", authController.register);
 router.post("/login", authController.login);
 router.get("/protected", authController.authCheck, authController.protected);
+router.get("/hello", (req, res) => {
+  res.json({ message: "Hello, World!" });
+});
 
+router.post("/echo", (req, res) => {
+  res.json({ message: req.body.message });
+});
 router.get("/", (req, res) => {
   try {
     return res.send("We're Live");
@@ -47,16 +53,7 @@ router.get("/stores/tag/:tag", async (req, res) => {
   }
 });
 
-router.post("/stores", async (req, res) => {
-  try {
-    const newStore = new Stores(req.body);
-    await newStore.save();
-    res.status(201).json(newStore);
-  } catch (err) {
-    res.status(400).json({ error: err.message });
-  }
-});
-
+router.post("/stores", shopController.createStore);
 router.put("/stores/:id", async (req, res) => {
   try {
     const updatedStore = await Store.findByIdAndUpdate(
