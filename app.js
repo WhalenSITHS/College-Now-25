@@ -11,6 +11,13 @@ app.use(express.json());
   console.log(req.body);
   next();
 }); */
+app.get("/hello", (req, res) => {
+  res.json({ message: "Hello, World!" });
+});
+
+app.post("/echo", (req, res) => {
+  res.json({ message: req.body.message });
+});
 app.use("/", routes);
 
 app.use((req, res) => {
