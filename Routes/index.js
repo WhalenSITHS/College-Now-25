@@ -3,7 +3,8 @@ const router = new express.Router();
 const Stores = require("../Models/Stores.js");
 const shopController = require("../controllers/shopController");
 const authController = require("../Controllers/authController");
-
+const userController = require("../Controllers/userController");
+const upload = require("../middleware/upload");
 router.post("/register", authController.register);
 router.post("/login", authController.login);
 router.get("/protected", authController.authCheck, authController.protected);
@@ -97,5 +98,9 @@ router.post("/login", (req, res) => {
   const { username, password } = req.body;
   res.send(`${username} has logged in`);
 });
-
+router.post(
+  "/user/profilePic",
+  upload.single("profilePic"),
+  userController.uploadProfilePic
+);
 module.exports = router;

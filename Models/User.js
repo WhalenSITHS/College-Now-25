@@ -20,6 +20,9 @@ const UserSchema = new Schema({
       },
     },
   ],
+  profilePic: {
+    type: String,
+  },
 });
 
 UserSchema.pre("save", async function (next) {
