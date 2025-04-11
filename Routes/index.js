@@ -47,7 +47,31 @@ router.get("/stores/tag/:tag", async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
-
+/**
+ * @swagger
+ * /stores:
+ *   post:
+ *     summary: "Create a new store"
+ *     description: "Creates a new store entry in the database."
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *               address:
+ *                 type: string
+ *             required:
+ *               - name
+ *     responses:
+ *       201:
+ *         description: "Store created successfully."
+ *       400:
+ *         description: "Invalid input."
+ */
 router.post("/stores", async (req, res) => {
   try {
     const newStore = new Stores(req.body);
@@ -57,7 +81,12 @@ router.post("/stores", async (req, res) => {
     res.status(400).json({ error: err.message });
   }
 });
-
+/**
+ * @swagger
+ * /stores/{id}:
+    post:
+      summary: "Create a new store"
+ */
 router.put("/stores/:id", async (req, res) => {
   try {
     const updatedStore = await Store.findByIdAndUpdate(

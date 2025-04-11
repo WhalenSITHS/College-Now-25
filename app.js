@@ -1,16 +1,30 @@
 const express = require("express");
 const port = process.env.PORT || 3000;
+const swaggerJsDoc = require("swagger-jsdoc");
+const swaggerUi = require("swagger-ui-express");
 const app = express();
 require("./DB/mongoose");
 const routes = require("./Routes/index");
-//routes imported from routes folder
+const swaggerOptions = {
+  swaggerDefinition: {
+    openapi: "3.0.0",
+    info: {
+      title: "College Now API",
+      version: ".7",
+      description: " My teacher made me do this",
+    },
+    servers: [
+      {
+        url: "http://localhost:3000",
+      },
+    ],
+  },
+  apis: ["./app.js", "./Routes/index.js"],
+};
+const swaggerDocs = swaggerJsDoc(swaggerOptions);
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 app.use(express.json());
-//app.use(express.urlencoded());
-//global middleware
-/* app.use((req, res, next) => {
-  console.log(req.body);
-  next();
-}); */
+
 app.use("/", routes);
 
 app.use((req, res) => {
