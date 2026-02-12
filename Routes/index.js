@@ -2,8 +2,10 @@ const express = require("express");
 const router = new express.Router();
 const userRoutes = require("./User");
 const locationRoutes = require("./Locations");
+const pokemonRoutes = require("./Poke");
 router.use("/users", userRoutes);
 router.use("/locations", locationRoutes);
+router.use("/pokemon", pokemonRoutes);
 router.get("/", (req, res) => {
   try {
     return res.send("We're Live");
