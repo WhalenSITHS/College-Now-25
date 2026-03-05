@@ -2,10 +2,12 @@ const express = require("express");
 const router = new express.Router();
 const userRoutes = require("./User");
 const locationRoutes = require("./Locations");
+const reviewRoutes = require("./Reviews");
 const shopController = require("../controllers/shopController");
 const logger = require("../middleware/logger.js");
 router.use("/users", logger.logger, userRoutes);
 router.use("/locations", locationRoutes);
+router.use("/reviews", reviewRoutes);
 router.get("/", (req, res) => {
   try {
     return res.send("We're Live");
